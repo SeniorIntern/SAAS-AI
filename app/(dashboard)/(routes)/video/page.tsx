@@ -1,23 +1,23 @@
-"use client";
+'use client';
 
-import * as z from "zod";
-import axios from "axios";
-import { useState } from "react";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { toast } from "react-hot-toast";
-import { FileAudio } from "lucide-react";
-import { useRouter } from "next/navigation";
+import * as z from 'zod';
+import axios from 'axios';
+import { useState } from 'react';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { toast } from 'react-hot-toast';
+import { FileAudio } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
-import { Heading } from "@/components/heading";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
-import { Loader } from "@/components/loader";
-import { Empty } from "@/components/ui/empty";
-import { useProModal } from "@/hooks/use-pro-modal";
+import { Heading } from '@/components/heading';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Form, FormControl, FormField, FormItem } from '@/components/ui/form';
+import { Loader } from '@/components/loader';
+import { Empty } from '@/components/ui/empty';
+import { useProModal } from '@/hooks/use-pro-modal';
 
-import { formSchema } from "./constants";
+import { formSchema } from './constants';
 
 const VideoPage = () => {
   const router = useRouter();
@@ -27,7 +27,7 @@ const VideoPage = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      prompt: "",
+      prompt: ''
     }
   });
 
@@ -45,14 +45,14 @@ const VideoPage = () => {
       if (error?.response?.status === 403) {
         proModal.onOpen();
       } else {
-        toast.error("Something went wrong.");
+        toast.error('Something went wrong.');
       }
     } finally {
       router.refresh();
     }
-  }
+  };
 
-  return ( 
+  return (
     <div>
       <Heading
         title="Video Generation"
@@ -63,20 +63,9 @@ const VideoPage = () => {
       />
       <div className="px-4 lg:px-8">
         <Form {...form}>
-          <form 
-            onSubmit={form.handleSubmit(onSubmit)} 
-            className="
-              rounded-lg 
-              border 
-              w-full 
-              p-4 
-              px-3 
-              md:px-6 
-              focus-within:shadow-sm
-              grid
-              grid-cols-12
-              gap-2
-            "
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="grid w-full grid-cols-12 gap-2 rounded-lg border p-4 px-3 focus-within:shadow-sm md:px-6"
           >
             <FormField
               name="prompt"
@@ -85,15 +74,20 @@ const VideoPage = () => {
                   <FormControl className="m-0 p-0">
                     <Input
                       className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent"
-                      disabled={isLoading} 
-                      placeholder="Clown fish swimming in a coral reef" 
+                      disabled={isLoading}
+                      placeholder="Clown fish swimming in a coral reef"
                       {...field}
                     />
                   </FormControl>
                 </FormItem>
               )}
             />
-            <Button className="col-span-12 lg:col-span-2 w-full" type="submit" disabled={isLoading} size="icon">
+            <Button
+              className="col-span-12 w-full lg:col-span-2"
+              type="submit"
+              disabled={isLoading}
+              size="icon"
+            >
               Generate
             </Button>
           </form>
@@ -103,17 +97,18 @@ const VideoPage = () => {
             <Loader />
           </div>
         )}
-        {!video && !isLoading && (
-          <Empty label="No video files generated." />
-        )}
+        {!video && !isLoading && <Empty label="No video files generated." />}
         {video && (
-          <video controls className="w-full aspect-video mt-8 rounded-lg border bg-black">
+          <video
+            controls
+            className="mt-8 aspect-video w-full rounded-lg border bg-black"
+          >
             <source src={video} />
           </video>
         )}
       </div>
     </div>
-   );
-}
- 
+  );
+};
+
 export default VideoPage;

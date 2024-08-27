@@ -1,44 +1,47 @@
-"use client";
+'use client';
 
-import TypewriterComponent from "typewriter-effect";
-import Link from "next/link";
-import { useAuth } from "@clerk/nextjs";
+import { useAuth } from '@clerk/nextjs';
+import Link from 'next/link';
+import TypewriterComponent from 'typewriter-effect';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 
 export const LandingHero = () => {
   const { isSignedIn } = useAuth();
 
   return (
-    <div className="text-white font-bold py-36 text-center space-y-5">
-      <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl space-y-5 font-extrabold">
+    <div className="space-y-5 py-36 text-center font-bold text-white">
+      <div className="space-y-5 text-4xl font-extrabold sm:text-5xl md:text-6xl lg:text-7xl">
         <h1>The Best AI Tool for</h1>
-        <div className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
+        <div className="bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent">
           <TypewriterComponent
             options={{
               strings: [
-                "Chatbot.",
-                "Photo Generation.",
-                "Blog Writing.",
-                "Mail Writing."
+                'Chatbot.',
+                'Photo Generation.',
+                'Blog Writing.',
+                'Mail Writing.'
               ],
               autoStart: true,
-              loop: true,
+              loop: true
             }}
           />
         </div>
       </div>
-      <div className="text-sm md:text-xl font-light text-zinc-400">
+      <div className="text-sm font-light text-zinc-400 md:text-xl">
         Create content using AI 10x faster.
       </div>
       <div>
-        <Link href={isSignedIn ? "/dashboard" : "/sign-up"}>
-          <Button variant="premium" className="md:text-lg p-4 md:p-6 rounded-full font-semibold">
+        <Link href={isSignedIn ? '/dashboard' : '/sign-up'}>
+          <Button
+            variant="premium"
+            className="rounded-full p-4 font-semibold md:p-6 md:text-lg"
+          >
             Start Generating For Free
           </Button>
         </Link>
       </div>
-      <div className="text-zinc-400 text-xs md:text-sm font-normal">
+      <div className="text-xs font-normal text-zinc-400 md:text-sm">
         No credit card required.
       </div>
     </div>

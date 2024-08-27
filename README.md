@@ -59,7 +59,6 @@ NEXT_PUBLIC_APP_URL="http://localhost:3000"
 
 ```shell
 npx prisma db push
-
 ```
 
 ### Start the app

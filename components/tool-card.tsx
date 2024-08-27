@@ -1,22 +1,22 @@
-"use client";
+'use client';
 
-import Image from "next/image";
+import Image from 'next/image';
 
-import { 
+import {
   Card,
   CardHeader,
   CardTitle,
   CardDescription,
-  CardContent,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { useRouter } from "next/navigation";
+  CardContent
+} from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { useRouter } from 'next/navigation';
 
 interface ToolCardProps {
-  src: string,
-  href: string,
-  title: string,
-  description: string,
+  src: string;
+  href: string;
+  title: string;
+  description: string;
   premium?: boolean;
 }
 
@@ -28,24 +28,26 @@ export const ToolCard = ({
   premium
 }: ToolCardProps) => {
   const router = useRouter();
-  
+
   const onClick = () => {
     router.push(href);
-  }
+  };
 
   return (
     <Card onClick={onClick} className="group cursor-pointer">
       <CardHeader>
-        <CardTitle className="text-lg font-bold flex items-center">
-        <div className="relative h-8 w-8 mr-2 group-hover:scale-125 transition duration-150">
-          <Image alt="Icon" src={src} fill />
-        </div>
+        <CardTitle className="flex items-center text-lg font-bold">
+          <div className="relative mr-2 h-8 w-8 transition duration-150 group-hover:scale-125">
+            <Image alt="Icon" src={src} fill />
+          </div>
           {title}
         </CardTitle>
         <CardDescription>{description}</CardDescription>
         {premium && (
           <CardContent className="p-0">
-            <Badge variant="premium" className="uppercase">pro</Badge>
+            <Badge variant="premium" className="uppercase">
+              pro
+            </Badge>
           </CardContent>
         )}
       </CardHeader>
